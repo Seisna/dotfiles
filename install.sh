@@ -21,6 +21,7 @@ function install_rtx_plugin() {
 }
 
 function apply_dotfiles() {
+  echo "applying dotfiles"
   chezmoi=$(command -v chezmoi)
   script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" > /dev/null && pwd )"
   "${chezmoi}" init --apply "--source=${script_dir}"
