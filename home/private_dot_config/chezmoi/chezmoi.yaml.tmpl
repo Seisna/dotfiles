@@ -11,12 +11,12 @@
   {{- $hostname = .chezmoi.hostname -}}
 {{- end -}}
 
-{{- if eq $hostname "MNA-Laptop" -}}
+{{- if eq $hostname "seisna" -}}
   {{- $personal = true -}}
   {{- $work = false -}}
   {{- $agekey = true -}}
   {{- $kubernetes = true -}}
-{{- else if eq $hostname "MNA-Laptop-work" -}}
+{{- else if eq $hostname "MNA-Laptop" -}}
   {{- $personal = false -}}
   {{- $work = true -}}
   {{- $agekey = true -}}
