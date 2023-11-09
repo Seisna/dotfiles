@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+
+{{ $brews := list
+  "coreutils"
+  "curl"
+  "git"
+  "jq"
+  "lsd"
+  "openssl-osx-ca"
+  "yubico-piv-tool"
+  "zoxide"
+-}}
+
+{{ $casks := list
+  "1password-cli"
+  "bartender"
+  "font-fira-code-nerd-font"
+  "karabiner-elements"
+  "keyboard-maestro"
+  "linearmouse"
+  "orbstack"
+  "rocket"
+  "shottr"
+  "visual-studio-code"
+  "yubico-yubikey-manager"
+-}}
+
+{{- if .personal -}}
+  {{ $brews = concat $brews (list
+    "ffmpeg"
+  )
+  -}}
+  {{ $casks = concat $casks (list
+    "calibre"
+  )
+  -}}
+{{- end -}}
+
+{{- if .work -}}
+  {{ $brews = concat $brews (list
+    "openvpn"
+    "svn"
+  )
+  -}}
+  {{ $casks = concat $casks (list
+    "google-cloud-sdk"
+    "viscosity"
+  )
+  -}}
+{{- end -}}
+
+function main() {
+  brew bundle --no-lock --file=/dev/stdin <<EOF
+{{ range ($brews | sortAlpha | uniq) -}}
+brew "{{ . }}"
+{{ end -}}
+{{ range ($casks | sortAlpha | uniq) -}}
+cask "{{ . }}"
+{{ end -}}
+EOF
+}
+
+if [[ ${#BASH_SOURCE[@]} = 1 ]]; then
+  main
+fi
