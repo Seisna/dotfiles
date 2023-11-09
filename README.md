@@ -11,5 +11,5 @@ I manage my system/dotfiles through Chezmoi:
 ## Installation Flow
 
 ```
-curl https://raw.githubusercontent.com/Seisna/dotfiles/master/install.sh | bash
+curl -sS https://raw.githubusercontent.com/Seisna/dotfiles/master/install.sh | bash /dev/stdin
 ```
